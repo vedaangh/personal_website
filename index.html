@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedaangh Rungta - Academic Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #FFFFF8;
+            --text-color: #333;
+            --link-color: #00008B;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --link-color: #6495ED;
+        }
+
+        body {
+            font-family: 'Computer Modern Serif', Georgia, serif;
+            line-height: 1.6;
+            margin: 0; 
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+        .theme-switch input {
+            display: none;
+        }
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+        }
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        .slider.round {
+            border-radius: 34px;
+        }
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: inherit;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid;
+            position: relative;
+        }
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        h1, h2, h3 {
+            font-family: 'Computer Modern Serif', Georgia, serif;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 1px solid;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        h3 {
+            font-size: 1.3em;
+            margin-top: 20px;
+        }
+        p, ul {
+            margin-bottom: 15px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: var(--link-color);
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .abstract {
+            font-style: italic;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid;
+            background-color: #f9f9f9;
+            border-color: #ccc;
+        }
+        [data-theme="dark"] .abstract {
+            background-color: #2a2a2a;
+            border-color: #444;
+        }
+        .section {
+            margin-top: 30px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid;
+            font-size: 0.9em;
+        }
+
+        .social-links {
+            margin-top: 15px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+        .social-links a:hover {
+            transform: scale(1.1);
+        }
+        .social-links img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-links svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-color);
+            transition: fill 0.3s;
+        }
+
+        .social-links a:hover svg {
+            fill: var(--link-color);
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
+        </label>
+    </div>
+    <div class="container">
+        <header>
+            <div class="profile-container">
+                <img src="face.jpg" alt="Vedaangh Rungta" class="profile-picture">
+                <div>
+                    <h1>Vedaangh Rungta</h1>
+                    <p>Computer Science Student | University of Cambridge</p>
+                    <p>Email: vr373@cam.ac.uk | Phone: (+44) 07410078378</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="abstract">
+            <h2>About Me</h2>
+            <p>Computer Science student at the University of Cambridge, specializing in artificial intelligence, software engineering, and research. Experienced in developing AI-powered solutions and conducting research in the field of geometric deep learning. Seeking opportunities to contribute to cutting-edge projects, at the forefront of innovation.</p>
+        </section>
+
+        <section class="section">
+            <h2>1. Education</h2>
+            <h3>1.1 University of Cambridge (September 2023 – June 2026)</h3> 
+            <p>Studying the Computer Science Tripos, achieving a 1st Class in First Year. 
+                Vice-President of <a href="https://www.cuai.org.uk/">CUAI</a>, and on committee for <a href="https://cucats.org/">CUCaTS</a> 
+                and <a href="https://cuhcs.soc.srcf.net/">CUHCS</a>.</p>
+
+
+            <h3>1.2 King's Maths School (September 2021 – August 2023)</h3>
+            <p>I achieved A* grades in Mathematics, Further Mathematics, Physics, and the EPQ during my A Levels, and an A with 92% in my AS Levels. I also led the Student Council as President, and established the Chess and Robotics clubs.</p>
+        
+        </section>
+
+        <section class="section">
+            <h2>2. Professional Experience</h2>
+            <h3>2.1 Software Engineering Intern, Nustom (July 2024 – August 2024)</h3>
+
+            <p><i><a href="https://nustom.com">Nustom</a> is making it possible for everyone to build software by 
+                offering end-to-end development services and creating intuitive tools for non-technical users.</i></p>
+            <p>I implemented fixes for errors in AI-generated Typescript code and developed a Python retrieval system using regular expressions for LLM self-correction.</p>
+
+            <h3>2.2 Course Facilitator, LEAF (February 2024 – March 2024)</h3>
+            <p><i><a href="https://www.leaf.courses/">Leaf</a> is a nonprofit that empowers teenagers to explore impactful ideas and make informed choices for their futures.</i></p>
+            <p>Facilitated the course: <a href="https://www.leaf.courses/dilemmas-and-dangers-in-ai">The Dilemmas 
+                and Dangers of AI</a> and collaborated with experts from Deepmind, Conjecture, and the Adam Smith Institute.</p>
+        
+
+            <h3>2.3 Risk and Core Development Intern, XTX Markets (August 2022 – September 2022)</h3>
+            <p><i><a href="https://xtxmarkets.com">XTX Markets</a> is a technology-driven liquidity provider, specializing in electronic trading and market-making across various asset classes.</i></p>
+            <p>During my internship at XTX Markets, I deployed production code to provide daily insights on market risks faced by the portfolio, developed Python software for generating critical visual insights in collaboration with quants and the risk team, and designed algorithms to process noisy daily PnL data while combining it with factor attribution statistics.</p>
+        </section>
+
+        <section class="section">
+            <h2>3. Research Experience</h2>   
+            <h3>3.1 King's Research Fellowship (July 2024 - Ongoing)</h3>
+            <p>Project: Applying Decision Transformers to Chess</p>
+            <ul>
+                <li>Supervised by Dr. Apinan Hasthanasombat</li>
+                <li>Provided with £1800 grant to pursue research</li> 
+            </ul>
+
+            <h3>3.2 Independent Research = (January 2024 - Ongoing)</h3>
+            <p>Topic: [Redacted]</p>
+            <ul>
+                <li>Working with Prof. Pietro Lio at the University of Cambridge's Geometric Deep Learning Lab</li>
+                <li>Auditing Masters Course: Geometric Deep Learning</li>
+            </ul>
+
+            <h3>3.3 Non-Trivial Research Fellowship (September 2022 – December 2022)</h3>
+            <p>Project: Reward Hacking Literature Review</p>
+            <ul>
+                <li>Awarded $1000 stipend alongside access to $10,000 funding to delve into AI Safety</li>
+                <li>Conducted comprehensive literature review on reward hacking in AI systems</li>
+            </ul>
+
+            <h3>3.4 King's Certificate Supervised by Wayve (September 2021 – July 2023)</h3>
+            <p>Project: <a href="https://drive.google.com/file/d/1ntK0YxXOk12dFYaksXYfsR051rMu1iZi/view">Sim2Real Style Transfer with CycleGANs</a></p>
+            <ul>
+                <li>Developed Deep Learning pipeline converting simulated images into realistic training data for self-driving cars</li>
+                <li>Deployed models using PyTorch and analyzed subsequent results using Tensorboard</li>
+                <li>Presented at King's College London, in front of industry experts</li>
+            </ul>
+
+
+        </section>
+
+        <section class="section">
+            <h2>4. Awards and Achievements</h2>
+            <ul>
+                <li><a href="https://www.non-trivial.org/">Non-Trivial Fellowship</a></li>
+                <li><a href="https://www.robotevents.com/teams/V5RC/8148T">Various awards from the Vex Robotics Competition</a></li>
+                <li><a href="https://www.arkwright.org.uk/">Arkwright Engineering Scholarship</a></li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Vedaangh Rungta | Last updated: September 1, 2024</p>
+            <div class="social-links">
+                <a href="mailto:vedaangh@outlook.com" title="Email">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </a>
+                <a href="https://x.com/vedaangh" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/vedaangh" target="_blank" rel="noopener noreferrer" title="GitHub">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+          
+            if (currentTheme === 'dark') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
+            else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }    
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+    </script>
+</body>
+</html>
