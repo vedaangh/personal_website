@@ -113,4 +113,3 @@ dist
 .vscode-test
 
 node_modules/
-.next/
