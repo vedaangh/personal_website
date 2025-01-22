@@ -13,7 +13,7 @@ interface BlogPost {
   content: string;
 }
 
-const CustomCursor = () => {
+const CustomCursor = ({ className }: { className?: string }) => {
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   
@@ -44,7 +44,7 @@ const CustomCursor = () => {
     <div 
       className={`fixed w-8 h-8 rounded-full border-2 pointer-events-none z-50 transition-all duration-75 ease-out ${
         isHovering ? 'bg-gray-300/30 border-black/80' : 'border-black'
-      }`}
+      } ${className || ''}`}
       style={{ 
         transform: `translate(${position.x - 16}px, ${position.y - 16}px)`
       }}
@@ -172,31 +172,36 @@ export default function Home() {
     <div className={`min-h-screen cursor-none font-light transition-colors duration-300 ${
       isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'
     }`}>
-      <CustomCursor />
+      <CustomCursor className="hidden md:block" />
       
       <button
         onClick={() => setIsDark(!isDark)}
-        className={`fixed top-8 right-8 p-2 rounded-full cursor-none transition-colors ${
+        className={`fixed top-4 right-4 md:top-8 md:right-8 p-2 rounded-full cursor-none transition-colors ${
           isDark ? 'bg-gray-800 text-white' : 'bg-gray-100 text-black'
         }`}
       >
         {isDark ? '☀️' : '🌙'}
       </button>
 
-      <div className={`fixed top-0 left-0 h-screen w-64 p-8 border-r transition-colors ${
-        isDark ? 'border-gray-800' : 'border-gray-100'
-      }`}>
-        <div className="mb-32">
+      <div className={`
+        fixed top-0 left-0 w-full md:w-64 md:h-screen 
+        p-4 md:p-8 
+        border-b md:border-r md:border-b-0 
+        bg-opacity-80 backdrop-blur-sm
+        z-40
+        transition-colors ${isDark ? 'border-gray-800' : 'border-gray-100'}
+      `}>
+        <div className="md:mb-32 mb-4">
           <h1 className="text-xl mb-1">Vedaangh Rungta</h1>
           <p className="text-sm text-gray-500">Cambridge University</p>
         </div>
 
-        <nav className="space-y-4">
+        <nav className="flex md:block space-x-4 md:space-x-0 md:space-y-4 overflow-x-auto pb-2 md:pb-0">
           {(['about', 'career', 'research', 'blog', 'things'] as const).map((section) => (
             <button
               key={section}
               onClick={() => setActiveSection(section)}
-              className={`block text-left hover:opacity-50 transition-opacity cursor-none ${
+              className={`block text-left whitespace-nowrap hover:opacity-50 transition-opacity cursor-none ${
                 activeSection === section ? 'opacity-100' : 'opacity-30'
               }`}
             >
@@ -206,8 +211,8 @@ export default function Home() {
         </nav>
       </div>
 
-      <main className="ml-64 p-8">
-        <div className="max-w-2xl ml-32 mt-32">
+      <main className="pt-32 md:pt-8 md:ml-64 p-4 md:p-8">
+        <div className="max-w-2xl mx-auto md:ml-32 md:mt-32">
           <AnimatePresence mode="wait">
             {activeSection === 'about' && (
               <motion.div
@@ -218,7 +223,7 @@ export default function Home() {
                 variants={contentVariants}
                 className="space-y-8"
               >
-                <h2 className="text-6xl font-light leading-tight">
+                <h2 className="text-4xl md:text-6xl font-light leading-tight">
                   Hey, I'm{' '}
                   <span 
                     className="relative inline-block cursor-none"
@@ -301,22 +306,22 @@ export default function Home() {
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    className={`group p-8 -mx-8 rounded-xl transition-all duration-300 ${
+                    className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
                       isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
                     }`}
                   >
                     <div className="space-y-4">
                       <div className="flex justify-between items-baseline">
-                        <h3 className={`text-2xl font-light transition-colors ${
+                        <h3 className={`text-xl md:text-2xl font-light transition-colors ${
                           isDark ? 'group-hover:text-white' : 'group-hover:text-black'
                         }`}>
                           {item.company}
                         </h3>
-                        <span className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+                        <span className={`text-base md:text-lg ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
                           {item.period}
                         </span>
                       </div>
-                      <p className={`text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                      <p className={`text-base md:text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                         {item.role}
                       </p>
                       <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>
@@ -339,20 +344,20 @@ export default function Home() {
               >
                 {/* Current Research */}
                 <motion.div variants={itemVariants} className="space-y-4">
-                  <h3 className="text-2xl font-light">Current Research</h3>
-                  <div className={`group p-8 -mx-8 rounded-xl transition-all duration-300 ${
+                  <h3 className="text-xl md:text-2xl font-light">Current Research</h3>
+                  <div className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
                     isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
                   }`}>
                     <div className="space-y-4">
                       <div className="flex justify-between items-baseline">
-                        <h4 className="text-xl font-light group-hover:opacity-80 transition-opacity">
+                        <h4 className="text-xl md:text-2xl font-light group-hover:opacity-80 transition-opacity">
                           {content.research.current.title}
                         </h4>
-                        <span className="text-sm opacity-60">
+                        <span className="text-base md:text-lg opacity-60">
                           {content.research.current.period}
                         </span>
                       </div>
-                      <p className="text-lg opacity-80">
+                      <p className="text-base md:text-lg opacity-80">
                         {content.research.current.place}
                       </p>
                       <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'opacity-70'}`}>
@@ -364,24 +369,24 @@ export default function Home() {
 
                 {/* Previous Research */}
                 <motion.div variants={itemVariants} className="space-y-4">
-                  <h3 className="text-2xl font-light">Previous Research</h3>
+                  <h3 className="text-xl md:text-2xl font-light">Previous Research</h3>
                   {content.research.publications.map((pub, index) => (
                     <div 
                       key={index}
-                      className={`group p-8 -mx-8 rounded-xl transition-all duration-300 ${
+                      className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
                         isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
                       }`}
                     >
                       <div className="space-y-4">
                         <div className="flex justify-between items-baseline">
-                          <h4 className="text-xl font-light group-hover:opacity-80 transition-opacity">
+                          <h4 className="text-xl md:text-2xl font-light group-hover:opacity-80 transition-opacity">
                             {pub.title}
                           </h4>
-                          <span className="text-sm opacity-60">
+                          <span className="text-base md:text-lg opacity-60">
                             {pub.period}
                           </span>
                         </div>
-                        <p className="text-lg opacity-80">
+                        <p className="text-base md:text-lg opacity-80">
                           {pub.venue}
                         </p>
                         <p className="leading-relaxed opacity-70">
@@ -405,7 +410,7 @@ export default function Home() {
               >
                 <motion.div
                   variants={itemVariants}
-                  className={`group p-8 -mx-8 rounded-xl transition-all duration-300 ${
+                  className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
                     isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
                   }`}
                 >
@@ -431,21 +436,21 @@ export default function Home() {
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    className={`group p-8 -mx-8 rounded-xl transition-all duration-300 ${
+                    className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
                       isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
                     }`}
                   >
                     <div className="space-y-4">
                       <div className="flex justify-between items-baseline">
-                        <h3 className="text-2xl font-light group-hover:opacity-80 transition-opacity">
+                        <h3 className="text-xl md:text-2xl font-light group-hover:opacity-80 transition-opacity">
                           {project.title}
                         </h3>
-                        <span className="text-sm opacity-60">
+                        <span className="text-base md:text-lg opacity-60">
                           {project.period}
                         </span>
                       </div>
                       {project.role && (
-                        <p className="text-lg opacity-80">
+                        <p className="text-base md:text-lg opacity-80">
                           {project.role}
                         </p>
                       )}
@@ -462,7 +467,7 @@ export default function Home() {
       </main>
 
       <div 
-        className="fixed bottom-8 right-8 text-sm"
+        className="fixed bottom-4 right-4 md:bottom-8 md:right-8 text-sm"
         onMouseEnter={() => setIsContactOpen(true)}
         onMouseLeave={() => setIsContactOpen(false)}
       >
