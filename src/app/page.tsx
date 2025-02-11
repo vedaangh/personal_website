@@ -288,7 +288,27 @@ export default function Home() {
                     </a>), technology, and Lego.
                   </p>
                   <p> 
-                  If you want to meet up, for now, just DM me on X. 
+                    You can{' '}
+                    <a 
+                      href="https://x.com/vedaangh" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={`underline transition-colors cursor-none ${
+                        isDark ? 'hover:text-white' : 'hover:text-gray-900'
+                      }`}
+                    >
+                      contact me via X
+                    </a>, or{' '}
+                    <a 
+                      href="https://cal.com/vedaangh/meal?month=2025-02&date=2025-02-08" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={`underline transition-colors cursor-none ${
+                        isDark ? 'hover:text-white' : 'hover:text-gray-900'
+                      }`}
+                    >
+                      book a meal with me
+                    </a>!
                   </p>
                 </div>
               </motion.div>
