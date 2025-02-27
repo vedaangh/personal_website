@@ -19,8 +19,24 @@ const CustomCursor = ({ className }: { className?: string }) => {
   const [isHovering, setIsHovering] = useState(false);
   
   useEffect(() => {
+    let frame: number;
+    let currentPosition = { x: 0, y: 0 };
+    let targetPosition = { x: 0, y: 0 };
+
+    const lerp = (start: number, end: number, factor: number) => {
+      return start + (end - start) * factor;
+    };
+
+    const animate = () => {
+      currentPosition.x = lerp(currentPosition.x, targetPosition.x, 0.2);
+      currentPosition.y = lerp(currentPosition.y, targetPosition.y, 0.2);
+      
+      setPosition(currentPosition);
+      frame = requestAnimationFrame(animate);
+    };
+
     const updateCursor = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      targetPosition = { x: e.clientX, y: e.clientY };
     };
 
     const updateHoverState = (e: MouseEvent) => {
@@ -34,17 +50,19 @@ const CustomCursor = ({ className }: { className?: string }) => {
 
     window.addEventListener('mousemove', updateCursor);
     window.addEventListener('mouseover', updateHoverState);
+    frame = requestAnimationFrame(animate);
     
     return () => {
       window.removeEventListener('mousemove', updateCursor);
       window.removeEventListener('mouseover', updateHoverState);
+      cancelAnimationFrame(frame);
     };
   }, []);
 
   return (
     <div 
-      className={`fixed w-8 h-8 rounded-full border-2 pointer-events-none z-50 transition-all duration-75 ease-out ${
-        isHovering ? 'bg-gray-300/30 border-black/80' : 'border-black'
+      className={`fixed w-8 h-8 rounded-full border-2 pointer-events-none z-50 transition-transform duration-75 ease-out ${
+        isHovering ? 'scale-150 bg-gray-300/30 border-black/80' : 'scale-100 border-black'
       } ${className || ''}`}
       style={{ 
         transform: `translate(${position.x - 16}px, ${position.y - 16}px)`
@@ -85,6 +103,19 @@ const itemVariants = {
     transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] }
   }
 };
+
+const navButtonClass = `
+  block text-left whitespace-nowrap 
+  hover:opacity-50 transition-all duration-300 
+  py-2 px-1 md:px-0
+  cursor-none text-base
+`;
+
+const contactLinkClass = `
+  flex items-center gap-3 
+  hover:opacity-50 transition-all duration-300 
+  cursor-none py-1
+`;
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState<'about' | 'career' | 'research' | 'blog' | 'things'>('about');
@@ -197,12 +228,12 @@ export default function Home() {
           <p className="text-sm text-gray-500">Cambridge University</p>
         </div>
 
-        <nav className="flex md:block space-x-4 md:space-x-0 md:space-y-4 overflow-x-auto pb-2 md:pb-0">
+        <nav className="flex md:block space-x-6 md:space-x-0 md:space-y-4 overflow-x-auto pb-2 md:pb-0">
           {(['about', 'career', 'research', 'blog', 'things'] as const).map((section) => (
             <button
               key={section}
               onClick={() => setActiveSection(section)}
-              className={`block text-left whitespace-nowrap hover:opacity-50 transition-opacity cursor-none ${
+              className={`${navButtonClass} ${
                 activeSection === section ? 'opacity-100' : 'opacity-30'
               }`}
             >
@@ -504,11 +535,11 @@ export default function Home() {
               href="https://github.com/vedaangh" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`flex items-center gap-3 hover:opacity-50 transition-opacity cursor-none ${
+              className={`${contactLinkClass} ${
                 isDark ? 'text-gray-300' : 'text-gray-600'
               }`}
             >
-              <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+              <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor" className="flex-shrink-0">
                 <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
               </svg>
               <span>github.com/vedaangh</span>
@@ -517,7 +548,7 @@ export default function Home() {
               href="https://x.com/vedaangh" 
               target="_blank" 
               rel="noopener noreferrer"
-              className={`flex items-center gap-3 hover:opacity-50 transition-opacity cursor-none ${
+              className={`${contactLinkClass} ${
                 isDark ? 'text-gray-300' : 'text-gray-600'
               }`}
             >
@@ -526,7 +557,7 @@ export default function Home() {
             </a>
             <a 
               href="mailto:vedaangh.rungta@gmail.com" 
-              className={`flex items-center gap-3 hover:opacity-50 transition-opacity cursor-none ${
+              className={`${contactLinkClass} ${
                 isDark ? 'text-gray-300' : 'text-gray-600'
               }`}
             >
