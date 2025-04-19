@@ -27,7 +27,7 @@ export default function CalendarPage() {
       </Head>
       <iframe
         id="calendar-iframe"
-        src="https://cal.com/15minvedaanghrungta?overlayCalendar=true"
+        src="https://cal.com/vedaangh/15minvedaanghrungta?overlayCalendar=true"
         frameBorder="0"
         className="w-full h-screen"
         allowFullScreen
