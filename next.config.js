@@ -4,7 +4,7 @@ const nextConfig = {
     distDir: '.next',
     // Vercel-specific optimizations
     experimental: {
-      optimizeCss: true,
+      // Removing optimizeCss because it requires critters package
       turbo: {
         loaders: {
           // Optimize loading of specific file types if needed
