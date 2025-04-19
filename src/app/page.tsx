@@ -58,8 +58,8 @@ const CustomCursor = ({ className }: { className?: string }) => {
       if (timestamp - lastUpdateTime.current >= 16) {
         lastUpdateTime.current = timestamp;
         setPosition(prev => ({
-          x: prev.x + (currentPosition.current.x - prev.x) * 0.2,
-          y: prev.y + (currentPosition.current.y - prev.y) * 0.2
+          x: prev.x + (currentPosition.current.x - prev.x) * 0.5,
+          y: prev.y + (currentPosition.current.y - prev.y) * 0.5
         }));
       }
       rafId = requestAnimationFrame(animateCursor);
@@ -674,14 +674,6 @@ export default function Home() {
                 className={`underline hover:opacity-70 transition-opacity ${isMobile ? '' : 'cursor-none'}`}
               >
                 X
-              </a>, or{' '}
-              <a 
-                href="https://cal.com/vedaangh/meal?month=2025-02&date=2025-02-08" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={`underline hover:opacity-70 transition-opacity ${isMobile ? '' : 'cursor-none'}`}
-              >
-                book a meal with me!
               </a>
             </p>
           </div>
