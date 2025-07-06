@@ -64,7 +64,7 @@ const CustomCursor = ({ className }: { className?: string }) => {
   return (
     <div 
       ref={cursorRef}
-      className={`fixed w-8 h-8 rounded-full border-2 pointer-events-none z-50 will-change-transform ${
+      className={`fixed w-8 h-8 rounded-full border-2 pointer-events-none z-[9999] will-change-transform ${
         isHovering ? 'bg-gray-300/30 border-black/80 dark:border-white/80 scale-110' : 'border-black dark:border-white'
       } ${className || ''} transition-[background,border,transform] duration-200 ease-out ${
         isVisible ? 'opacity-100' : 'opacity-0'
@@ -423,6 +423,7 @@ export default function Home() {
                     variants={contentVariants}
                     className="space-y-8"
                   >
+                    <h2 className="text-3xl md:text-5xl font-light">experience</h2>
                     {content.experience.map((item, index) => (
                       <a
                         key={index}
@@ -464,11 +465,11 @@ export default function Home() {
                     animate="enter"
                     exit="exit"
                     variants={contentVariants}
-                    className="space-y-16"
+                    className="space-y-8"
                   >
+                    <h2 className="text-3xl md:text-5xl font-light">research</h2>
                     {/* Current Research */}
                     <motion.div variants={itemVariants} className="space-y-4">
-                      <h3 className="text-xl md:text-2xl font-light">Current Research</h3>
                       <div className={`group p-5 md:p-6 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
                         isDark ? 'hover:bg-gray-800/60' : 'hover:bg-gray-100'
                       }`}>
@@ -492,7 +493,6 @@ export default function Home() {
 
                     {/* Previous Research */}
                     <motion.div variants={itemVariants} className="space-y-4">
-                      <h3 className="text-xl md:text-2xl font-light">Previous Research</h3>
                       {content.research.publications.map((pub, index) => (
                         <motion.div
                           key={index}
@@ -531,6 +531,7 @@ export default function Home() {
                     variants={contentVariants}
                     className="space-y-16"
                   >
+                    <h2 className="text-3xl md:text-5xl font-light mb-6">blog</h2>
                     <motion.div
                       variants={itemVariants}
                       className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
@@ -555,6 +556,7 @@ export default function Home() {
                     variants={contentVariants}
                     className="space-y-16"
                   >
+                    <h2 className="text-3xl md:text-5xl font-light mb-6">other stuff i've done</h2>
                     {content.projects.map((project, index) => (
                       <motion.div
                         key={index}
