@@ -17,19 +17,15 @@ interface BlogPost {
 
 // Optimize cursor with debounce
 const CustomCursor = ({ className }: { className?: string }) => {
-  const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const lastUpdateTime = useRef(0);
-  const currentPosition = useRef({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Use requestAnimationFrame for smoother cursor movement
-    let rafId: number;
-    
     const updateCursor = (e: MouseEvent) => {
-      // Store the position but don't update state directly
-      currentPosition.current = { x: e.clientX, y: e.clientY };
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
+      }
       setIsVisible(true);
     };
 
@@ -52,46 +48,27 @@ const CustomCursor = ({ className }: { className?: string }) => {
       setIsVisible(true);
     };
 
-    // Smooth animation loop with throttling
-    const animateCursor = (timestamp: number) => {
-      // Throttle updates to every ~16ms (60fps)
-      if (timestamp - lastUpdateTime.current >= 16) {
-        lastUpdateTime.current = timestamp;
-        setPosition(prev => ({
-          x: prev.x + (currentPosition.current.x - prev.x) * 0.5,
-          y: prev.y + (currentPosition.current.y - prev.y) * 0.5
-        }));
-      }
-      rafId = requestAnimationFrame(animateCursor);
-    };
-    
     window.addEventListener('mousemove', updateCursor);
     window.addEventListener('mouseover', updateHoverState);
     window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('mouseenter', handleMouseEnter);
-    
-    // Start the animation
-    rafId = requestAnimationFrame(animateCursor);
-    
+
     return () => {
       window.removeEventListener('mousemove', updateCursor);
       window.removeEventListener('mouseover', updateHoverState);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mouseenter', handleMouseEnter);
-      cancelAnimationFrame(rafId);
     };
   }, []);
 
   return (
     <div 
+      ref={cursorRef}
       className={`fixed w-8 h-8 rounded-full border-2 pointer-events-none z-50 will-change-transform ${
-        isHovering ? 'bg-gray-300/30 border-black/80 scale-110' : 'border-black'
+        isHovering ? 'bg-gray-300/30 border-black/80 dark:border-white/80 scale-110' : 'border-black dark:border-white'
       } ${className || ''} transition-[background,border,transform] duration-200 ease-out ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
-      style={{ 
-        transform: `translate3d(${position.x - 16}px, ${position.y - 16}px, 0)`
-      }}
       aria-hidden="true"
     />
   );
@@ -133,9 +110,9 @@ const itemVariants = {
 };
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState<'about' | 'career' | 'research' | 'blog' | 'things'>('about');
+  const [activeSection, setActiveSection] = useState<'about' | 'experience' | 'research' | 'blog' | 'things'>('about');
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [isMounted, setIsMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -143,19 +120,6 @@ export default function Home() {
   // Prevent hydration mismatch with dark mode
   useEffect(() => {
     setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    // Check system preference on initial load
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDark(prefersDark);
-    
-    // Listen for changes in system preference
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    
-    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   useEffect(() => {
@@ -212,7 +176,7 @@ export default function Home() {
   }, []);
   
   // Memoize section change handler
-  const handleSectionChange = useCallback((section: 'about' | 'career' | 'research' | 'blog' | 'things') => {
+  const handleSectionChange = useCallback((section: 'about' | 'experience' | 'research' | 'blog' | 'things') => {
     setActiveSection(section);
     // Scroll to top on mobile when changing sections
     if (isMobile) {
@@ -222,24 +186,30 @@ export default function Home() {
 
   const content = {
     about: "Building AI systems that scale.",
-    career: [
+    experience: [
+      {
+        company: "Checkmate Labs",
+        role: "Founder",
+        period: "Jun 2025 - Present",
+        url: "https://checkmatelabs.net"
+      },
       {
         company: "Conduct AI",
         role: "Product Engineer Intern",
-        period: "Dec 2023 - Present",
-        description: "Building AI transparency tools for enterprise ABAP systems, focusing on code comprehension and documentation generation."
+        period: "Dec 2024 - Jan 2025",
+        url: "https://conduct-ai.com"
       },
       {
         company: "Nustom",
         role: "Software Engineer Intern",
-        period: "Jul 2023 - Aug 2023",
-        description: "Setup automated error correction for AI generated typescript code, achieving 100% resolution rates across GPT-4 and Claude models."
+        period: "Jul 2024 - Aug 2024",
+        url: "https://nustom.com"
       },
       {
         company: "XTX Markets",
         role: "Risk Intern",
         period: "Aug 2022 - Sep 2022",
-        description: "Developed production Python software for market risk analysis, processing daily PnL data for one of the world's largest algorithmic trading firms."
+        url: "https://xtxmarkets.com"
       }
     ],
     research: {
@@ -255,6 +225,12 @@ export default function Home() {
           venue: "King's College, Cambridge",
           period: "Jul 2023 - Sep 2023",
           description: "Investigated limitations of decision transformers in Markovian environments, focusing on chess gameplay analysis."
+        },
+        {
+          title: "CycleGAN for Synthetic Data Generation",
+          venue: "Independent Research",
+          period: "Sep 2021 - Jun 2023",
+          description: "Conducted research with Wayve building CycleGANs to generate realistic images from simulation screenshots."
         }
       ]
     },
@@ -262,8 +238,14 @@ export default function Home() {
       {
         title: "Cambridge University AI Society",
         role: "Vice President & Co-Founder",
-        period: "2023 - Present",
+        period: "2024 - 2025",
         description: "Building the most talent dense community in Cambridge."
+      },
+      {
+        title: "VEX Robotics Competition",
+        role: "Competitor",
+        period: "2019 - 2023",
+        description: "Competed in the VEX Robotics Competition."
       },
       {
         title: "CodeSec CIC",
@@ -289,18 +271,24 @@ export default function Home() {
       </Head>
       
       <div className={`min-h-screen ${isMobile ? '' : 'cursor-none'} font-light transition-colors duration-300 ${
-        isDark ? 'bg-gray-900 text-white' : 'bg-white text-black'
+        isDark
+          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white'
+          : 'bg-gradient-to-br from-white via-gray-50 to-gray-100 text-black'
       }`}>
         {!isMobile && <CustomCursor className="hidden md:block" />}
         
         <button
           onClick={() => setIsDark(!isDark)}
-          className={`fixed top-4 right-4 md:top-8 md:right-8 p-2 rounded-full ${isMobile ? '' : 'cursor-none'} z-50 transition-all duration-200 hover:scale-110 ${
-            isDark ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-black hover:bg-gray-200'
-          }`}
-          aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          className={`fixed top-4 right-4 md:top-8 md:right-8 w-12 h-6 rounded-full flex items-center p-1 z-50 transition-colors duration-200 ${
+            isDark ? 'bg-gray-700' : 'bg-gray-300'
+          } ${isMobile ? '' : 'cursor-none'}`}
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
         >
-          {isDark ? '☀️' : '🌙'}
+          <span
+            className={`w-4 h-4 bg-white rounded-full transform transition-transform duration-200 ${
+              isDark ? 'translate-x-0' : 'translate-x-6'
+            }`}
+          />
         </button>
 
         <div className={`
@@ -313,16 +301,16 @@ export default function Home() {
         `}>
           <div className="md:mb-32 mb-4">
             <h1 className="text-xl md:text-2xl mb-1 font-medium">Vedaangh Rungta</h1>
-            <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Cambridge University</p>
+            <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>CS @ Cambridge</p>
           </div>
 
           <nav className="flex md:block space-x-4 md:space-x-0 md:space-y-4 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-            {(['about', 'career', 'research', 'blog', 'things'] as const).map((section) => (
+            {(['about', 'experience', 'research', 'blog', 'things'] as const).map((section) => (
               <button
                 key={section}
                 onClick={() => handleSectionChange(section)}
-                className={`block text-left whitespace-nowrap hover:opacity-50 transition-opacity ${isMobile ? '' : 'cursor-none'} ${
-                  activeSection === section ? 'opacity-100' : 'opacity-30'
+                className={`block text-left whitespace-nowrap border-b-2 transition-colors duration-200 ${isMobile ? '' : 'cursor-none'} ${
+                  activeSection === section ? 'opacity-100 border-current' : 'opacity-50 border-transparent hover:border-current'
                 }`}
                 aria-current={activeSection === section ? 'page' : undefined}
               >
@@ -400,82 +388,71 @@ export default function Home() {
                       <span className="transition-opacity duration-200">.</span>
                     </h2>
                     <div className={`space-y-4 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                      <p className="text-xl">CS @ Cambridge. AI-something-something. Something about startups.</p>
+                      <p className="text-xl">CS @ Cambridge. Founder @ Checkmate Labs. Summer Fellow @ YC.</p>
                       <p className="leading-relaxed">
-                        I'm studying computer science at Cambridge. In my free time I obsess over both the theory and implementation of AI. I'm also trying to get better at building things: communities (like <a 
-                          href="https://cuai.org.uk" 
-                          className={`underline transition-colors ${isMobile ? '' : 'cursor-none'} ${
-                            isDark ? 'hover:text-white' : 'hover:text-gray-900'
-                          }`}
+                        I'm currently based in San Francisco building a new tier of simulation technology. Feel free to contact me via{' '}
+                        <a
+                          href="https://x.com/vedaangh"
                           target="_blank"
                           rel="noopener noreferrer"
-                        >
-                          CUAI
-                        </a>), technology, and Lego.
-                      </p>
-                      <p> 
-                        You can{' '}
-                        <a 
-                          href="https://x.com/vedaangh" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
                           className={`underline transition-colors ${isMobile ? '' : 'cursor-none'} ${
                             isDark ? 'hover:text-white' : 'hover:text-gray-900'
                           }`}
                         >
-                          contact me via X
-                        </a>, or{' '}
-                        <a 
-                          href="https://cal.com/vedaangh/meal?month=2025-02&date=2025-02-08" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
+                          X
+                        </a>{' '}or{' '}
+                        <a
+                          href="mailto:vedaangh.rungta@gmail.com"
                           className={`underline transition-colors ${isMobile ? '' : 'cursor-none'} ${
                             isDark ? 'hover:text-white' : 'hover:text-gray-900'
                           }`}
                         >
-                          book a meal with me
-                        </a>!
+                          email
+                        </a>.
                       </p>
                     </div>
                   </motion.div>
                 )}
 
-                {activeSection === 'career' && (
+                {activeSection === 'experience' && (
                   <motion.div
-                    key="career"
+                    key="experience"
                     initial="exit"
                     animate="enter"
                     exit="exit"
                     variants={contentVariants}
-                    className="space-y-12"
+                    className="space-y-8"
                   >
-                    {content.career.map((item, index) => (
-                      <motion.div
+                    {content.experience.map((item, index) => (
+                      <a
                         key={index}
-                        variants={itemVariants}
-                        className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 will-change-transform ${
-                          isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
-                        }`}
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block focus:outline-none"
                       >
-                        <div className="space-y-4">
-                          <div className="flex flex-col md:flex-row md:justify-between md:items-baseline gap-1 md:gap-0">
-                            <h3 className={`text-xl md:text-2xl font-light transition-colors ${
-                              isDark ? 'group-hover:text-white' : 'group-hover:text-black'
-                            }`}>
-                              {item.company}
-                            </h3>
-                            <span className={`text-sm md:text-base ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-                              {item.period}
-                            </span>
+                        <motion.div
+                          variants={itemVariants}
+                          className={`group p-5 md:p-6 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 will-change-transform ${
+                            isDark ? 'hover:bg-gray-800/60' : 'hover:bg-gray-100'
+                          }`}
+                        >
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <h3 className={`text-lg md:text-xl font-light transition-colors ${
+                                  isDark ? 'group-hover:text-white' : 'group-hover:text-black'
+                                }`}>
+                                  {item.company}
+                                </h3>
+                                <p className={`text-sm md:text-base ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{item.role}</p>
+                              </div>
+                              <div className={`opacity-0 group-hover:opacity-100 transition-opacity ${isDark ? 'text-gray-300' : 'text-gray-500'}`} aria-hidden="true">→</div>
+                            </div>
+                            <span className={`text-xs md:text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{item.period}</span>
                           </div>
-                          <p className={`text-base md:text-lg ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-                            {item.role}
-                          </p>
-                          <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>
-                            {item.description}
-                          </p>
-                        </div>
-                      </motion.div>
+                        </motion.div>
+                      </a>
                     ))}
                   </motion.div>
                 )}
@@ -492,21 +469,20 @@ export default function Home() {
                     {/* Current Research */}
                     <motion.div variants={itemVariants} className="space-y-4">
                       <h3 className="text-xl md:text-2xl font-light">Current Research</h3>
-                      <div className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
-                        isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
+                      <div className={`group p-5 md:p-6 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
+                        isDark ? 'hover:bg-gray-800/60' : 'hover:bg-gray-100'
                       }`}>
-                        <div className="space-y-4">
-                          <div className="flex justify-between items-baseline">
-                            <h4 className="text-xl md:text-2xl font-light group-hover:opacity-80 transition-opacity">
-                              {content.research.current.title}
-                            </h4>
-                            <span className="text-base md:text-lg opacity-60">
-                              {content.research.current.period}
-                            </span>
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <h4 className="text-lg md:text-xl font-light group-hover:opacity-80 transition-opacity">
+                                {content.research.current.title}
+                              </h4>
+                              <p className="text-sm md:text-base opacity-80">{content.research.current.place}</p>
+                            </div>
+                            <div className={`opacity-0 group-hover:opacity-100 transition-opacity ${isDark ? 'text-gray-300' : 'text-gray-500'}`} aria-hidden="true">→</div>
                           </div>
-                          <p className="text-base md:text-lg opacity-80">
-                            {content.research.current.place}
-                          </p>
+                          <span className={`text-xs md:text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{content.research.current.period}</span>
                           <p className={`leading-relaxed ${isDark ? 'text-gray-300' : 'opacity-70'}`}>
                             {content.research.current.description}
                           </p>
@@ -518,29 +494,29 @@ export default function Home() {
                     <motion.div variants={itemVariants} className="space-y-4">
                       <h3 className="text-xl md:text-2xl font-light">Previous Research</h3>
                       {content.research.publications.map((pub, index) => (
-                        <div 
+                        <motion.div
                           key={index}
-                          className={`group p-6 md:p-8 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
-                            isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-50'
+                          variants={itemVariants}
+                          className={`group p-5 md:p-6 -mx-4 md:-mx-8 rounded-xl transition-all duration-300 ${
+                            isDark ? 'hover:bg-gray-800/60' : 'hover:bg-gray-100'
                           }`}
                         >
-                          <div className="space-y-4">
-                            <div className="flex justify-between items-baseline">
-                              <h4 className="text-xl md:text-2xl font-light group-hover:opacity-80 transition-opacity">
-                                {pub.title}
-                              </h4>
-                              <span className="text-base md:text-lg opacity-60">
-                                {pub.period}
-                              </span>
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <div>
+                                <h4 className="text-lg md:text-xl font-light group-hover:opacity-80 transition-opacity">
+                                  {pub.title}
+                                </h4>
+                                <p className="text-sm md:text-base opacity-80">{pub.venue}</p>
+                              </div>
+                              <div className={`opacity-0 group-hover:opacity-100 transition-opacity ${isDark ? 'text-gray-300' : 'text-gray-500'}`} aria-hidden="true">→</div>
                             </div>
-                            <p className="text-base md:text-lg opacity-80">
-                              {pub.venue}
-                            </p>
+                            <span className={`text-xs md:text-sm ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{pub.period}</span>
                             <p className="leading-relaxed opacity-70">
                               {pub.description}
                             </p>
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </motion.div>
                   </motion.div>
@@ -613,80 +589,6 @@ export default function Home() {
             </LazyMotion>
           </div>
         </main>
-
-        <div 
-          className="fixed bottom-4 right-4 md:bottom-8 md:right-8 text-base"
-          onMouseEnter={() => setIsContactOpen(true)}
-          onMouseLeave={() => setIsContactOpen(false)}
-        >
-          <div 
-            className={`
-              border rounded-lg p-6 mb-3 transform transition-all duration-300 min-w-[280px]
-              shadow-lg backdrop-blur-sm
-              ${isContactOpen ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'}
-              ${isDark ? 'bg-gray-900/90 border-gray-800' : 'bg-white/90 border-gray-100'}
-            `}
-          >
-            <div className="space-y-4">
-              <a 
-                href="https://github.com/vedaangh" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={`flex items-center gap-3 hover:opacity-70 transition-opacity ${isMobile ? '' : 'cursor-none'} ${
-                  isDark ? 'text-gray-300' : 'text-gray-600'
-                }`}
-                aria-label="GitHub Profile"
-              >
-                <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-                <span>github.com/vedaangh</span>
-              </a>
-              <a 
-                href="https://x.com/vedaangh" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={`flex items-center gap-3 hover:opacity-70 transition-opacity ${isMobile ? '' : 'cursor-none'} ${
-                  isDark ? 'text-gray-300' : 'text-gray-600'
-                }`}
-                aria-label="X (Twitter) Profile"
-              >
-                <span className="w-4 inline-flex justify-center text-base" aria-hidden="true">𝕏</span>
-                <span>@vedaangh</span>
-              </a>
-              <a 
-                href="mailto:vedaangh.rungta@gmail.com" 
-                className={`flex items-center gap-3 hover:opacity-70 transition-opacity ${isMobile ? '' : 'cursor-none'} ${
-                  isDark ? 'text-gray-300' : 'text-gray-600'
-                }`}
-                aria-label="Email"
-              >
-                <span className="w-4 inline-flex justify-center text-base" aria-hidden="true">✉</span>
-                <span>vedaangh.rungta@gmail.com</span>
-              </a>
-            </div>
-            <p className={`text-sm mt-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              You can contact me via{' '}
-              <a 
-                href="https://x.com/vedaangh" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className={`underline hover:opacity-70 transition-opacity ${isMobile ? '' : 'cursor-none'}`}
-              >
-                X
-              </a>
-            </p>
-          </div>
-          <button 
-            className={`text-gray-500 hover:opacity-70 transition-opacity ${isMobile ? '' : 'cursor-none'} px-3 py-1.5 rounded-full ${
-              isDark ? 'hover:bg-gray-800/50' : 'hover:bg-gray-100/80'
-            }`}
-            aria-expanded={isContactOpen}
-            aria-label="Toggle contact information"
-          >
-            Contact
-          </button>
-        </div>
       </div>
     </>
   );

@@ -8,6 +8,8 @@
 
 # next.js
 /out/
+# Next.js build directory
+/.next/
 
 # production
 /build
