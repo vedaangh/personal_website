@@ -32,6 +32,9 @@ export default function Home() {
               I've previously worked on product at <Link href="https://conduct-ai.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Conduct AI</Link> and risk at <Link href="https://xtxmarkets.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">XTX Markets</Link>. I've researched GNNs, diffusion-based graph generation, VLAs and RL under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Professor Pietro Lio</Link> at the Cambridge Geometric Deep Learning Lab, decision transformers under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Api Hasthanasombat</Link>. Independent research with CycleGANs.
             </p>
             <p>
+              I'm also a fellow at <Link href="https://hummingbird.vc" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Hummingbird VC</Link> and built the <Link href="https://cuai.org.uk" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">most talent dense community at Cambridge</Link>. Feel free to <Link href="mailto:vedaangh.rungta@gmail.com" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">reach out to me</Link>!
+            </p>
+            <p>
               You can check my projects and writings out <Link href="/blog" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">here</Link>.
             </p>
           </div>
