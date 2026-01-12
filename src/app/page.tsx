@@ -32,10 +32,10 @@ export default function Home() {
               My research background includes work on GNNs, diffusion-based graph generation, VLAs and RL under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Professor Pietro Lio</Link> at the Cambridge Geometric Deep Learning Lab, along with decision transformers under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Api Hasthanasombat</Link> and independent research with CycleGANs.
             </p>
             <p>
-              I'm also a fellow at <Link href="https://hummingbird.vc" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Hummingbird VC</Link> and built the <Link href="https://cuai.org.uk" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">most talent dense community at Cambridge</Link>. Feel free to <Link href="mailto:vedaangh.rungta@gmail.com" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">reach out to me</Link>!
+              I'm also a fellow at <Link href="https://hummingbird.vc" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Hummingbird VC</Link> and president of the <Link href="https://cuai.org.uk" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Cambridge University AI Society</Link>. 
             </p>
             <p>
-              You can check my projects and writings out <Link href="/blog" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">here</Link>.
+              You can check my projects and writings out <Link href="/blog" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">here</Link>. Feel free to <Link href="mailto:vedaangh.rungta@gmail.com" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">reach out to me</Link>!
             </p>
           </div>
 
