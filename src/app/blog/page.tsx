@@ -16,9 +16,10 @@ export default function Blog() {
     // Start animation immediately
     const timer = setTimeout(() => {
         setIntroStep('finished')
+        document.body.style.overflow = 'unset'
     }, 1500)
 
-    // Lock scroll
+    // Lock scroll initially
     document.body.style.overflow = 'hidden'
 
     return () => {
@@ -28,7 +29,7 @@ export default function Blog() {
   }, [])
 
   return (
-    <main className={`min-h-screen bg-[#f4f1ea] text-[#2c2c2c] flex flex-col items-center py-16 px-8 md:px-24 ${crimson.className} selection:bg-stone-300 overflow-hidden`}>
+    <main className={`min-h-screen bg-[#f4f1ea] text-[#2c2c2c] flex flex-col items-center py-16 px-8 md:px-24 ${crimson.className} selection:bg-stone-300`}>
         <div className="w-full flex flex-col items-center min-h-[60vh]">
            {/* Animation Container */}
            <motion.div 
