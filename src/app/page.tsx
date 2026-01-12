@@ -23,7 +23,7 @@ export default function Home() {
         <>
           <div className="w-full max-w-xl text-left mb-16 space-y-6 text-base md:text-lg leading-relaxed">
             <p>
-              Hey, I'm Ved. I'm an undergraduate student reading Computer Science at the <span className="font-semibold">University of Cambridge</span>. Currently I'm training voice models, thinking about continual learning, and building startups.
+              Hey, I'm Ved. I'm an undergraduate student reading Computer Science at the <span className="font-semibold">University of Cambridge</span>. Currently I'm training voice models, thinking about continual learning, and building startups. I'm also the president of the <Link href="https://cuai.org.uk" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Cambridge University AI Society</Link>. 
             </p>
             <p>
               I spent the summer working on AI enhanced wargaming as a <Link href="https://checkmatelabs.net" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Y Combinator Summer Fellow</Link>. Before this, I worked on product at <Link href="https://conduct-ai.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Conduct AI</Link> and risk at <Link href="https://xtxmarkets.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">XTX Markets</Link>.
@@ -32,10 +32,7 @@ export default function Home() {
               My research background includes work on GNNs, diffusion-based graph generation, VLAs and RL under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Professor Pietro Lio</Link> at the Cambridge Geometric Deep Learning Lab, along with decision transformers under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Api Hasthanasombat</Link> and independent research with CycleGANs.
             </p>
             <p>
-              I'm also a fellow at <Link href="https://hummingbird.vc" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Hummingbird VC</Link> and president of the <Link href="https://cuai.org.uk" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Cambridge University AI Society</Link>. 
-            </p>
-            <p>
-              You can check my projects and writings out <Link href="/blog" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">here</Link>. Feel free to <Link href="mailto:vedaangh.rungta@gmail.com" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">reach out to me</Link>!
+              You can check my projects and writings out <Link href="/blog" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">here</Link>. 
             </p>
           </div>
 
