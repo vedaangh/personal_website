@@ -23,13 +23,13 @@ export default function Home() {
         <>
           <div className="w-full max-w-xl text-left mb-16 space-y-6 text-base md:text-lg leading-relaxed">
             <p>
-              Hey, I'm Ved. I'm an undergraduate student reading Computer Science at the <span className="font-semibold">University of Cambridge</span>.
+              Hey, I'm Ved. I'm an undergraduate student reading Computer Science at the <span className="font-semibold">University of Cambridge</span>. Currently I'm training voice models, thinking about continual learning, and building startups.
             </p>
             <p>
-              I spent the summer working on AI enhanced wargaming as a <Link href="https://checkmatelabs.net" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Y Combinator Summer Fellow</Link>. Currently I'm training voice models, thinking about continual learning, and building startups.
+              I spent the summer working on AI enhanced wargaming as a <Link href="https://checkmatelabs.net" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Y Combinator Summer Fellow</Link>. Before this, I worked on product at <Link href="https://conduct-ai.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Conduct AI</Link> and risk at <Link href="https://xtxmarkets.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">XTX Markets</Link>.
             </p>
             <p>
-              I've previously worked on product at <Link href="https://conduct-ai.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Conduct AI</Link> and risk at <Link href="https://xtxmarkets.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">XTX Markets</Link>. I've researched GNNs, diffusion-based graph generation, VLAs and RL under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Professor Pietro Lio</Link> at the Cambridge Geometric Deep Learning Lab, decision transformers under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Api Hasthanasombat</Link>. Independent research with CycleGANs.
+              My research background includes work on GNNs, diffusion-based graph generation, VLAs and RL under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Professor Pietro Lio</Link> at the Cambridge Geometric Deep Learning Lab, along with decision transformers under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Api Hasthanasombat</Link> and independent research with CycleGANs.
             </p>
             <p>
               I'm also a fellow at <Link href="https://hummingbird.vc" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Hummingbird VC</Link> and built the <Link href="https://cuai.org.uk" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">most talent dense community at Cambridge</Link>. Feel free to <Link href="mailto:vedaangh.rungta@gmail.com" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">reach out to me</Link>!
@@ -57,7 +57,7 @@ export default function Home() {
           <Link href="https://github.com/vedaangh" target="_blank" className="hover:text-black hover:underline transition-all">GitHub</Link>
         </div>
          <p className="text-[10px] text-stone-400 mt-6 tracking-[0.2em]">
-          2024 - PRESENT
+          2005 - PRESENT
         </p>
       </div>
     </main>
