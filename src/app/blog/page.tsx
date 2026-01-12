@@ -16,7 +16,7 @@ export default function Blog() {
     // Start animation immediately
     const timer = setTimeout(() => {
         setIntroStep('finished')
-    }, 600)
+    }, 1500)
 
     // Lock scroll
     document.body.style.overflow = 'hidden'
@@ -61,7 +61,7 @@ export default function Blog() {
                 className="absolute inset-0 mix-blend-multiply"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
               >
                 <Image
                   src="/vetruvian_humanoid.jpg"
