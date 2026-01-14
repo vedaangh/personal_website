@@ -591,17 +591,17 @@ video {
 .h-1 {
   height: 0.25rem;
 }
-.h-3 {
-  height: 0.75rem;
+.h-2 {
+  height: 0.5rem;
+}
+.h-5 {
+  height: 1.25rem;
 }
 .h-6 {
   height: 1.5rem;
 }
 .h-64 {
   height: 16rem;
-}
-.h-8 {
-  height: 2rem;
 }
 .h-px {
   height: 1px;
@@ -618,11 +618,8 @@ video {
 .w-12 {
   width: 3rem;
 }
-.w-24 {
-  width: 6rem;
-}
-.w-3 {
-  width: 0.75rem;
+.w-2 {
+  width: 0.5rem;
 }
 .w-48 {
   width: 12rem;
@@ -635,6 +632,9 @@ video {
 }
 .w-px {
   width: 1px;
+}
+.min-w-0 {
+  min-width: 0px;
 }
 .max-w-2xl {
   max-width: 42rem;
@@ -684,14 +684,8 @@ video {
 .gap-1 {
   gap: 0.25rem;
 }
-.gap-2 {
-  gap: 0.5rem;
-}
 .gap-4 {
   gap: 1rem;
-}
-.gap-8 {
-  gap: 2rem;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -762,25 +756,9 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(244 241 234 / var(--tw-bg-opacity, 1));
 }
-.bg-blue-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 197 253 / var(--tw-bg-opacity, 1));
-}
-.bg-blue-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 78 216 / var(--tw-bg-opacity, 1));
-}
 .bg-blue-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(30 64 175 / var(--tw-bg-opacity, 1));
-}
-.bg-red-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(252 165 165 / var(--tw-bg-opacity, 1));
-}
-.bg-red-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
 }
 .bg-red-800 {
   --tw-bg-opacity: 1;
@@ -820,8 +798,9 @@ video {
 .p-4 {
   padding: 1rem;
 }
-.p-6 {
-  padding: 1.5rem;
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 .px-2 {
   padding-left: 0.5rem;
@@ -834,10 +813,6 @@ video {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
-}
-.px-\[100px\] {
-  padding-left: 100px;
-  padding-right: 100px;
 }
 .py-1 {
   padding-top: 0.25rem;
@@ -955,6 +930,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity, 1));
 }
+.text-red-800 {
+  --tw-text-opacity: 1;
+  color: rgb(153 27 27 / var(--tw-text-opacity, 1));
+}
 .text-stone-400 {
   --tw-text-opacity: 1;
   color: rgb(168 162 158 / var(--tw-text-opacity, 1));
@@ -971,18 +950,14 @@ video {
   --tw-text-opacity: 1;
   color: rgb(68 64 60 / var(--tw-text-opacity, 1));
 }
-.text-red-800 {
-  --tw-text-opacity: 1;
-  color: rgb(153 27 27 / var(--tw-text-opacity, 1));
-}
 .underline {
   text-decoration-line: underline;
 }
-.decoration-stone-400 {
-  text-decoration-color: #a8a29e;
-}
 .decoration-red-800 {
   text-decoration-color: #991b1b;
+}
+.decoration-stone-400 {
+  text-decoration-color: #a8a29e;
 }
 .underline-offset-2 {
   text-underline-offset: 2px;
@@ -1074,6 +1049,11 @@ body {
   color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
+.hover\:text-red-600:hover {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
+}
+
 .hover\:text-stone-500:hover {
   --tw-text-opacity: 1;
   color: rgb(120 113 108 / var(--tw-text-opacity, 1));
@@ -1082,11 +1062,6 @@ body {
 .hover\:text-stone-600:hover {
   --tw-text-opacity: 1;
   color: rgb(87 83 78 / var(--tw-text-opacity, 1));
-}
-
-.hover\:text-red-600:hover {
-  --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity, 1));
 }
 
 .hover\:underline:hover {
@@ -1109,8 +1084,32 @@ body {
 
 @media (min-width: 768px) {
 
+  .md\:ml-28 {
+    margin-left: 7rem;
+  }
+
+  .md\:h-3 {
+    height: 0.75rem;
+  }
+
+  .md\:h-6 {
+    height: 1.5rem;
+  }
+
+  .md\:h-8 {
+    height: 2rem;
+  }
+
   .md\:h-80 {
     height: 20rem;
+  }
+
+  .md\:w-24 {
+    width: 6rem;
+  }
+
+  .md\:w-3 {
+    width: 0.75rem;
   }
 
   .md\:w-64 {
@@ -1125,9 +1124,42 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:items-center {
+    align-items: center;
+  }
+
+  .md\:gap-2 {
+    gap: 0.5rem;
+  }
+
+  .md\:gap-4 {
+    gap: 1rem;
+  }
+
+  .md\:gap-8 {
+    gap: 2rem;
+  }
+
+  .md\:p-6 {
+    padding: 1.5rem;
+  }
+
+  .md\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
   .md\:px-24 {
     padding-left: 6rem;
     padding-right: 6rem;
+  }
+
+  .md\:text-right {
+    text-align: right;
   }
 
   .md\:text-4xl {
@@ -1143,5 +1175,10 @@ body {
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .md\:text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 } 

@@ -54,24 +54,20 @@ const coopData = [
 
 const HorizontalBarChart = ({ data, title, domain = [-5, 5], unit = '' }: { data: any[], title?: string, domain?: [number, number], unit?: string }) => {
   return (
-    <div className="my-8 p-6 bg-white/50 border border-stone-200 rounded-lg shadow-sm">
-      {title && <h3 className={`text-lg font-bold mb-4 ${cinzel.className}`}>{title}</h3>}
+    <div className="my-8 p-4 md:p-6 bg-white/50 border border-stone-200 rounded-lg shadow-sm">
+      {title && <h3 className={`text-base md:text-lg font-bold mb-4 ${cinzel.className}`}>{title}</h3>}
       <div className="space-y-3">
         {data.map((d, i) => {
-          const width = Math.abs(d.value) / (domain[1] - domain[0]) * 100 * 2 // approximation for simple scaling if symmetric
-          // Better scaling logic:
           const range = domain[1] - domain[0]
           const zeroOffset = (0 - domain[0]) / range * 100
           const barWidth = (Math.abs(d.value) / range) * 100
           const left = d.value < 0 ? zeroOffset - barWidth : zeroOffset
 
           return (
-            <div key={i} className="flex items-center gap-4 text-sm">
-              <div className="w-24 text-right font-semibold text-stone-600 shrink-0">{d.label}</div>
-              <div className="flex-1 h-8 bg-stone-100 relative rounded overflow-hidden">
-                {/* Zero Line */}
+            <div key={i} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 text-sm">
+              <div className="md:w-24 text-left md:text-right font-semibold text-stone-600 shrink-0 text-xs md:text-sm">{d.label}</div>
+              <div className="flex-1 h-6 md:h-8 bg-stone-100 relative rounded overflow-hidden min-w-0">
                 <div className="absolute top-0 bottom-0 w-px bg-stone-300 z-10" style={{ left: `${zeroOffset}%` }} />
-                
                 <motion.div 
                   initial={{ width: 0 }}
                   whileInView={{ width: `${barWidth}%` }}
@@ -79,7 +75,10 @@ const HorizontalBarChart = ({ data, title, domain = [-5, 5], unit = '' }: { data
                   className={`absolute top-0 bottom-0 ${d.value > 0 ? 'bg-red-800' : 'bg-blue-800'} opacity-80`}
                   style={{ left: `${left}%` }}
                 />
-                <div className="absolute top-0 bottom-0 flex items-center px-2 z-20 text-xs font-mono font-bold text-stone-700" style={{ left: d.value < 0 ? `${left}%` : `${left + barWidth}%`, transform: d.value < 0 ? 'translateX(-100%)' : 'none' }}>
+                <div 
+                  className="absolute top-0 bottom-0 flex items-center px-1 md:px-2 z-20 text-[10px] md:text-xs font-mono font-bold text-stone-700" 
+                  style={{ left: d.value < 0 ? `${left}%` : `${left + barWidth}%`, transform: d.value < 0 ? 'translateX(-100%)' : 'none' }}
+                >
                   {d.value}{unit}
                 </div>
               </div>
@@ -87,7 +86,7 @@ const HorizontalBarChart = ({ data, title, domain = [-5, 5], unit = '' }: { data
           )
         })}
       </div>
-      <div className="flex justify-between text-xs text-stone-400 mt-2 px-[100px] font-mono">
+      <div className="flex justify-between text-[10px] md:text-xs text-stone-400 mt-2 md:ml-28 font-mono">
         <span>{domain[0]}</span>
         <span>0</span>
         <span>{domain[1]}</span>
@@ -98,19 +97,17 @@ const HorizontalBarChart = ({ data, title, domain = [-5, 5], unit = '' }: { data
 
 const GroupedBarChart = ({ data, title }: { data: any[], title?: string }) => {
   const maxVal = Math.max(...data.map(d => Math.max(Math.abs(d.china), Math.abs(d.us))))
-  // Add some buffer
   const domainMax = Math.ceil(maxVal * 1.1)
 
   return (
-    <div className="my-8 p-6 bg-white/50 border border-stone-200 rounded-lg shadow-sm">
-      {title && <h3 className={`text-lg font-bold mb-4 ${cinzel.className}`}>{title}</h3>}
+    <div className="my-8 p-4 md:p-6 bg-white/50 border border-stone-200 rounded-lg shadow-sm">
+      {title && <h3 className={`text-base md:text-lg font-bold mb-4 ${cinzel.className}`}>{title}</h3>}
       <div className="space-y-4">
         {data.map((d, i) => (
-          <div key={i} className="flex items-center gap-4 text-sm">
-            <div className="w-24 text-right font-semibold text-stone-600 shrink-0">{d.label}</div>
-            <div className="flex-1 flex flex-col gap-1">
-              {/* Pro-China */}
-              <div className="h-6 bg-stone-100 relative rounded overflow-hidden w-full">
+          <div key={i} className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 text-sm">
+            <div className="md:w-24 text-left md:text-right font-semibold text-stone-600 shrink-0 text-xs md:text-sm">{d.label}</div>
+            <div className="flex-1 flex flex-col gap-1 min-w-0">
+              <div className="h-5 md:h-6 bg-stone-100 relative rounded overflow-hidden w-full">
                 <div className="absolute top-0 bottom-0 w-px bg-stone-300 z-10 left-1/2" />
                 <motion.div 
                   initial={{ width: 0 }}
@@ -121,7 +118,7 @@ const GroupedBarChart = ({ data, title }: { data: any[], title?: string }) => {
                     right: d.china < 0 ? '50%' : undefined 
                   }}
                 />
-                <span className="absolute top-0 bottom-0 flex items-center px-2 z-20 text-xs font-mono text-stone-700"
+                <span className="absolute top-0 bottom-0 flex items-center px-1 md:px-2 z-20 text-[10px] md:text-xs font-mono text-stone-700"
                   style={{ 
                     left: d.china > 0 ? `calc(50% + ${(Math.abs(d.china) / domainMax) * 50}%)` : undefined,
                     right: d.china < 0 ? `calc(50% + ${(Math.abs(d.china) / domainMax) * 50}%)` : undefined
@@ -129,8 +126,7 @@ const GroupedBarChart = ({ data, title }: { data: any[], title?: string }) => {
                   {d.china}
                 </span>
               </div>
-              {/* Pro-US */}
-              <div className="h-6 bg-stone-100 relative rounded overflow-hidden w-full">
+              <div className="h-5 md:h-6 bg-stone-100 relative rounded overflow-hidden w-full">
                 <div className="absolute top-0 bottom-0 w-px bg-stone-300 z-10 left-1/2" />
                 <motion.div 
                   initial={{ width: 0 }}
@@ -141,7 +137,7 @@ const GroupedBarChart = ({ data, title }: { data: any[], title?: string }) => {
                     right: d.us < 0 ? '50%' : undefined 
                   }}
                 />
-                 <span className="absolute top-0 bottom-0 flex items-center px-2 z-20 text-xs font-mono text-stone-700"
+                 <span className="absolute top-0 bottom-0 flex items-center px-1 md:px-2 z-20 text-[10px] md:text-xs font-mono text-stone-700"
                   style={{ 
                     left: d.us > 0 ? `calc(50% + ${(Math.abs(d.us) / domainMax) * 50}%)` : undefined,
                     right: d.us < 0 ? `calc(50% + ${(Math.abs(d.us) / domainMax) * 50}%)` : undefined
@@ -153,9 +149,9 @@ const GroupedBarChart = ({ data, title }: { data: any[], title?: string }) => {
           </div>
         ))}
       </div>
-      <div className="flex justify-center gap-8 mt-4 text-xs font-bold">
-        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-red-800"></div>Pro-China</div>
-        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-blue-800"></div>Pro-US</div>
+      <div className="flex justify-center gap-4 md:gap-8 mt-4 text-[10px] md:text-xs font-bold">
+        <div className="flex items-center gap-1 md:gap-2"><div className="w-2 h-2 md:w-3 md:h-3 bg-red-800"></div>Pro-China</div>
+        <div className="flex items-center gap-1 md:gap-2"><div className="w-2 h-2 md:w-3 md:h-3 bg-blue-800"></div>Pro-US</div>
       </div>
     </div>
   )

@@ -50,6 +50,16 @@ eval("// Exports\nmodule.exports = {\n\t\"style\": {\"fontFamily\":\"'__Crimson_
 
 /***/ }),
 
+/***/ "(ssr)/./node_modules/next/font/google/target.css?{\"path\":\"src/app/page.tsx\",\"import\":\"Crimson_Text\",\"arguments\":[{\"weight\":[\"400\",\"600\",\"700\"],\"subsets\":[\"latin\"]}],\"variableName\":\"crimson\"}":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/font/google/target.css?{"path":"src/app/page.tsx","import":"Crimson_Text","arguments":[{"weight":["400","600","700"],"subsets":["latin"]}],"variableName":"crimson"} ***!
+  \************************************************************************************************************************************************************************************************/
+/***/ ((module) => {
+
+eval("// Exports\nmodule.exports = {\n\t\"style\": {\"fontFamily\":\"'__Crimson_Text_e46616', '__Crimson_Text_Fallback_e46616'\",\"fontStyle\":\"normal\"},\n\t\"className\": \"__className_e46616\"\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvbmV4dC9mb250L2dvb2dsZS90YXJnZXQuY3NzP3tcInBhdGhcIjpcInNyYy9hcHAvcGFnZS50c3hcIixcImltcG9ydFwiOlwiQ3JpbXNvbl9UZXh0XCIsXCJhcmd1bWVudHNcIjpbe1wid2VpZ2h0XCI6W1wiNDAwXCIsXCI2MDBcIixcIjcwMFwiXSxcInN1YnNldHNcIjpbXCJsYXRpblwiXX1dLFwidmFyaWFibGVOYW1lXCI6XCJjcmltc29uXCJ9IiwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQSxXQUFXLDhGQUE4RjtBQUN6RztBQUNBIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vdHlwZXNjcmlwdC1wcm9qZWN0Ly4vbm9kZV9tb2R1bGVzL25leHQvZm9udC9nb29nbGUvdGFyZ2V0LmNzcz8zMmJhIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIEV4cG9ydHNcbm1vZHVsZS5leHBvcnRzID0ge1xuXHRcInN0eWxlXCI6IHtcImZvbnRGYW1pbHlcIjpcIidfX0NyaW1zb25fVGV4dF9lNDY2MTYnLCAnX19Dcmltc29uX1RleHRfRmFsbGJhY2tfZTQ2NjE2J1wiLFwiZm9udFN0eWxlXCI6XCJub3JtYWxcIn0sXG5cdFwiY2xhc3NOYW1lXCI6IFwiX19jbGFzc05hbWVfZTQ2NjE2XCJcbn07XG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/next/font/google/target.css?{\"path\":\"src/app/page.tsx\",\"import\":\"Crimson_Text\",\"arguments\":[{\"weight\":[\"400\",\"600\",\"700\"],\"subsets\":[\"latin\"]}],\"variableName\":\"crimson\"}\n");
+
+/***/ }),
+
 /***/ "(ssr)/./node_modules/next/dist/api/image.js":
 /*!*********************************************!*\
   !*** ./node_modules/next/dist/api/image.js ***!

@@ -1,5 +1,5 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/blog/ccpval/page": "app/blog/ccpval/page.js",
-  "/blog/page": "app/blog/page.js"
+  "/blog/page": "app/blog/page.js",
+  "/page": "app/page.js"
 }
