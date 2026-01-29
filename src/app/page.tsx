@@ -11,7 +11,7 @@ export default function Home() {
     <main className={`min-h-screen flex flex-col justify-between px-6 py-10 md:px-12 md:py-16 ${sans.className}`}>
       <div className="flex-1 flex flex-col justify-center max-w-md">
         <p className="text-base md:text-lg leading-relaxed">
-          Hey I'm Ved! I study CS at Cambridge and am training multimodal models. I'm president of{' '}
+          Hey, I'm Ved! I study CS at Cambridge where I'm training multimodal models. I'm also president of{' '}
           <Link href="https://cuai.org.uk" target="_blank" className="link-underline">CUAI</Link>.
         </p>
 
@@ -27,7 +27,7 @@ export default function Home() {
           href="/blog"
           className="mt-10 text-sm text-[var(--muted)] hover:text-[var(--fg)] transition-colors"
         >
-          Writing →
+          Blog →
         </Link>
       </div>
 

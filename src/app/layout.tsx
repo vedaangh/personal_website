@@ -4,10 +4,6 @@ import { Metadata, Viewport } from 'next';
 export const metadata: Metadata = {
   title: 'Vedaangh Rungta',
   description: 'Personal Website',
-  icons: {
-    icon: '/thinking.jpg',
-    apple: '/thinking.jpg',
-  },
 };
 
 export const viewport: Viewport = {

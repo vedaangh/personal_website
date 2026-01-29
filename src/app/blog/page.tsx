@@ -27,7 +27,7 @@ export default function Blog() {
         </Link>
 
         <h1 className="text-base mt-16 mb-10">
-          Writing
+          Blog
         </h1>
 
         <div className="space-y-4">
