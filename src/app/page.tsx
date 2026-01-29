@@ -30,7 +30,7 @@ export default function Home() {
             <Link href="https://www.cl.cam.ac.uk/" target="_blank" className="text-[var(--accent)] hover:underline">Cambridge Geometric Deep Learning Lab</Link>
             {' '}under{' '}
             <Link href="https://www.cl.cam.ac.uk/~pl219/" target="_blank" className="text-[var(--accent)] hover:underline">Pietro Lio</Link>,
-            {' '}working on graph neural networks, diffusion-based molecular generation, and vision-language-action models for RL, and at King's College on decision transformers with{' '}
+            {' '}working on graph neural networks, diffusion-based molecular generation, and vision-language-action models for RL, and at King's College Cambridgeon decision transformers with{' '}
             <Link href="https://apih.co/" target="_blank" className="text-[var(--accent)] hover:underline">Api Hasthanasombat</Link>.
           </p>
 
