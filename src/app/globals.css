@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --bg: #fafafa;
-  --fg: #141414;
-  --muted: #737373;
-  --accent: #b45309;
-  --border: #e5e5e5;
+  --bg: #fcfcfc;
+  --fg: #111;
+  --muted: #999;
+  --accent: #111;
+  --border: #eee;
 }
 
 html {
@@ -24,3 +24,15 @@ body {
   background: var(--fg);
   color: var(--bg);
 }
+
+/* Elegant link underline */
+.link-underline {
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 0.3s ease;
+}
+
+.link-underline:hover {
+  border-color: var(--fg);
+}
+
