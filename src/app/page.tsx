@@ -1,62 +1,81 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Cinzel, Crimson_Text } from 'next/font/google'
-import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { Inter, Newsreader } from 'next/font/google'
 import Link from 'next/link'
 
-const cinzel = Cinzel({ subsets: ['latin'] })
-const crimson = Crimson_Text({ weight: ['400', '600', '700'], subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600'] })
+const newsreader = Newsreader({ subsets: ['latin'], weight: ['400', '500'], style: ['normal', 'italic'] })
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }
+  })
+}
 
 export default function Home() {
-  const [introStep, setIntroStep] = useState<'idle' | 'man' | 'humanoid' | 'finished'>('idle')
-
-  useEffect(() => {
-    // Only scroll logic needed here now that animations are moved to /blog
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
 
   return (
-    <main className={`min-h-screen bg-[#f4f1ea] text-[#2c2c2c] flex flex-col items-center py-16 px-8 md:px-24 ${crimson.className} selection:bg-stone-300`}>
-      {introStep === 'idle' ? (
-        <>
-          <div className="w-full max-w-xl text-left mb-16 space-y-6 text-base md:text-lg leading-relaxed">
-            <p>
-              Hey, I'm Ved. I'm an undergraduate student reading Computer Science at the <span className="font-semibold">University of Cambridge</span>. Currently I'm training voice models, thinking about continual learning, and building startups. I'm also the president of the <Link href="https://cuai.org.uk" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Cambridge University AI Society</Link>. 
-            </p>
-            <p>
-              I spent the summer working on AI enhanced wargaming as a <Link href="https://checkmatelabs.net" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Y Combinator Summer Fellow</Link>. Before this, I worked on product at <Link href="https://conduct-ai.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Conduct AI</Link> and risk at <Link href="https://xtxmarkets.com" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">XTX Markets</Link>.
-            </p>
-            <p>
-              My research background includes work on GNNs, diffusion-based graph generation, VLAs and RL under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Professor Pietro Lio</Link> at the Cambridge Geometric Deep Learning Lab, along with decision transformers under <Link href="https://apih.co/" target="_blank" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">Api Hasthanasombat</Link> and independent research with CycleGANs.
-            </p>
-            <p>
-              You can check my projects and writings out <Link href="/blog" className="underline decoration-stone-400 hover:text-stone-500 transition-colors">here</Link>. 
-            </p>
-          </div>
+    <main className={`h-screen overflow-hidden flex flex-col px-6 py-8 md:px-16 md:py-10 ${newsreader.className}`}>
+      <div className="flex-1 flex flex-col justify-center max-w-2xl pb-16">
+        <motion.h1
+          className={`${inter.className} text-3xl md:text-5xl font-medium tracking-tight leading-none mb-6 md:mb-8`}
+          initial="hidden"
+          animate="visible"
+          custom={0}
+          variants={fadeUp}
+        >
+          Vedaangh Rungta
+        </motion.h1>
 
-          <div className="relative mb-20 w-48 h-64 md:w-64 md:h-80">
-            <Image
-              src="/thinking.jpg"
-              alt="Thinking"
-              fill
-              className="object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-in-out mix-blend-multiply"
-              priority
-            />
-          </div>
-        </>
-      ) : null}
-      <div className="mt-auto pt-8 pb-12 text-center w-full max-w-lg border-t border-stone-200">
-        <div className="flex justify-center space-x-8 text-xs md:text-sm italic text-stone-600">
-          <Link href="https://x.com/vedaangh" target="_blank" className="hover:text-black hover:underline transition-all">Twitter</Link>
-          <Link href="mailto:vedaangh.rungta@gmail.com" className="hover:text-black hover:underline transition-all">Email</Link>
-          <Link href="https://github.com/vedaangh" target="_blank" className="hover:text-black hover:underline transition-all">GitHub</Link>
+        <div className="space-y-3 md:space-y-4 text-base md:text-lg leading-relaxed text-[var(--fg)]">
+          <motion.p initial="hidden" animate="visible" custom={1} variants={fadeUp}>
+            I'm currently studying Computer Science at Cambridge and training multimodal models. I'm also president of{' '}
+            <Link href="https://cuai.org.uk" target="_blank" className="text-[var(--accent)] hover:underline">CUAI</Link>.
+            {' '}I spend the rest of my time on political thought, theology, and fearing the collapse of meritocracy in a technofuturistic utopia (in Claude we trust).
+          </motion.p>
+
+          <motion.p initial="hidden" animate="visible" custom={2} variants={fadeUp}>
+            Previously wargaming with AI as a{' '}
+            <Link href="https://checkmatelabs.net" target="_blank" className="text-[var(--accent)] hover:underline">YC Summer Fellow</Link>,
+            {' '}product at{' '}
+            <Link href="https://conduct-ai.com" target="_blank" className="text-[var(--accent)] hover:underline">Conduct AI</Link>,
+            {' '}and risk at{' '}
+            <Link href="https://xtxmarkets.com" target="_blank" className="text-[var(--accent)] hover:underline">XTX Markets</Link>.
+            {' '}I've also been involved with research at the{' '}
+            <Link href="https://www.cl.cam.ac.uk/" target="_blank" className="text-[var(--accent)] hover:underline">Cambridge Geometric Deep Learning Lab</Link>
+            {' '}under{' '}
+            <Link href="https://www.cl.cam.ac.uk/~pl219/" target="_blank" className="text-[var(--accent)] hover:underline">Pietro Lio</Link>,
+            {' '}working on graph neural networks, diffusion-based molecular generation, and vision-language-action models for RL, and at King's College on decision transformers with{' '}
+            <Link href="https://apih.co/" target="_blank" className="text-[var(--accent)] hover:underline">Api Hasthanasombat</Link>.
+          </motion.p>
+
+          <motion.div initial="hidden" animate="visible" custom={3} variants={fadeUp} className="pt-2">
+            <Link
+              href="/blog"
+              className={`${inter.className} inline-flex items-center gap-2 text-[var(--fg)] font-medium hover:text-[var(--accent)] transition-colors`}
+            >
+              Writing
+              <span className="text-sm">→</span>
+            </Link>
+          </motion.div>
         </div>
-         <p className="text-[10px] text-stone-400 mt-6 tracking-[0.2em]">
-          2005 - PRESENT
-        </p>
       </div>
+
+      <motion.footer
+        initial="hidden"
+        animate="visible"
+        custom={6}
+        variants={fadeUp}
+        className="flex gap-8 text-sm text-[var(--muted)] pb-8"
+      >
+        <Link href="https://x.com/vedaangh" target="_blank" className="hover:text-[var(--fg)] transition-colors">Twitter</Link>
+        <Link href="mailto:vedaangh.rungta@gmail.com" className="hover:text-[var(--fg)] transition-colors">Email</Link>
+        <Link href="https://github.com/vedaangh" target="_blank" className="hover:text-[var(--fg)] transition-colors">GitHub</Link>
+      </motion.footer>
     </main>
   )
 }
