@@ -19,8 +19,12 @@ export default function Home() {
           Prev. <Link href="https://checkmatelabs.net" target="_blank" className="link-underline">YC Summer Fellows</Link>,{' '}
           <Link href="https://conduct-ai.com" target="_blank" className="link-underline">Conduct AI</Link>,{' '}
           <Link href="https://nustom.com" target="_blank" className="link-underline">Nustom</Link>,{' '}
-          <Link href="https://xtxmarkets.com" target="_blank" className="link-underline">XTX Markets</Link>.{' '}
+          <Link href="https://xtxmarkets.com" target="_blank" className="link-underline">XTX Markets</Link>,{' '}
           <Link href="https://www.cl.cam.ac.uk/research/nl/geometric-deep-learning/" target="_blank" className="link-underline">Cambridge GDL lab</Link>.
+        </p>
+
+        <p className="text-sm text-[var(--muted)] mt-3 leading-relaxed">
+          I've worked on AI wargames, drone simulations, molecular diffusion models, evals, and decision transformers. 
         </p>
 
         <Link
