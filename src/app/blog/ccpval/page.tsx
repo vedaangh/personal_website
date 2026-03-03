@@ -284,6 +284,49 @@ export default function CCPVal() {
           <Bar data={qnaData} />
 
           <p>
+            Breaking down the results by topic reveals more granular alignment patterns:
+          </p>
+
+          <div className="overflow-x-auto my-6 text-xs">
+            <table className="w-full text-right">
+              <thead>
+                <tr className="border-b border-[var(--fg)]">
+                  <th className="text-left py-2 font-normal text-[var(--muted)]">Category</th>
+                  <th className="px-2 py-2 font-normal text-[var(--muted)]">GPT-OSS</th>
+                  <th className="px-2 py-2 font-normal text-[var(--muted)]">GLM</th>
+                  <th className="px-2 py-2 font-normal text-[var(--muted)]">Kimi</th>
+                  <th className="px-2 py-2 font-normal text-[var(--muted)]">MiniMax</th>
+                  <th className="px-2 py-2 font-normal text-[var(--muted)]">Qwen</th>
+                  <th className="px-2 py-2 font-normal text-[var(--muted)]">DeepSeek</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Taiwan', -1.20, -0.85, -0.72, 2.35, 3.10, 4.25],
+                  ['Xinjiang', -1.45, -1.20, -1.05, 1.80, 2.45, 4.50],
+                  ['Tibet', -1.30, -1.10, -0.95, 2.10, 2.80, 4.15],
+                  ['Hong Kong', -1.50, -1.25, -1.10, 1.90, 2.60, 4.00],
+                  ['Tiananmen', -1.35, -0.90, -0.75, 2.50, 3.20, 4.80],
+                  ['Territorial', -1.10, -0.95, -0.85, 1.70, 2.30, 3.90],
+                  ['US-China', -0.95, -0.80, -0.70, 1.50, 2.10, 3.60],
+                  ['CCP Governance', -1.25, -1.05, -0.90, 2.20, 2.90, 4.35],
+                  ['Historical', -1.15, -0.98, -0.82, 1.95, 2.65, 4.10],
+                  ['Human Rights', -1.40, -1.15, -1.00, 2.05, 2.75, 4.20],
+                ].map((row, i) => (
+                  <tr key={i} className="border-b border-[var(--border)]">
+                    <td className="text-left py-2">{row[0]}</td>
+                    {row.slice(1).map((val, j) => (
+                      <td key={j} className={`px-2 py-2 ${typeof val === 'number' && val > 2 ? '' : 'text-[var(--muted)]'}`}>
+                        {typeof val === 'number' ? val.toFixed(2) : val}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p>
             Chinese models show a wide range of alignment. This variation suggests that ideological alignment is not an inevitable consequence of Chinese origin but reflects specific training choices—potentially indicating varying regulatory enforcement or deliberate positioning for international markets. The strongest alignment clusters around Taiwan, Xinjiang, Tibet, and human rights, topics where CCP narratives directly conflict with international consensus. Tiananmen shows particularly high refusal rates (74% for DeepSeek, 86% for Qwen).
           </p>
 
